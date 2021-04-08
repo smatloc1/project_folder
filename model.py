@@ -62,6 +62,5 @@ def connect_to_db(app, db_name='postgresql:///orgs', echo=True):
 
 if __name__ == '__main__':
     from server import app
-    
 
     db.create_all()
