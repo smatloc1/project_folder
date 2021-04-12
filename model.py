@@ -20,34 +20,68 @@ class Mission(db.Model):
   
 
 
-class Int(db.Model):
-    """ Organization Interests """
+class Cause(db.Model):
+    """ Organization cause """
 
-    __tablename__ = "interests"
+    __tablename__ = "causes"
 
-    interest_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    interest_name = db.Column(db.String(50), nullable=False)
+    cause_id = db.Column(db.Integer, autoincrement=True)
+    cause_name = db.Column(db.String(50), nullable=False, primary_key=True)
     
     def __repr__(self):
-        return f'<Int interest_id = {self.interest_id}, interest_name = {self.interest_name}>'
-  
+        return f'<Cause cause_id = {self.cause_id}, cause_name = {self.cause_name}>'
+ 
+ 
+  #####################################################################################################3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #####################################################################################################
 
 
 class Org(db.Model):
-    """ Organization Profile """
+    """ Nonprofit Organization Profile """
 
     __tablename__ = "orgs"
 
     org_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     org_name = db.Column(db.String(50), nullable=False, unique=True)
-    org_type = db.Column(db.String(2), default='NP')
-    org_vision = db.Column(db.String(100))
     org_mission = db.Column(db.String(100))
-    mission_cat = db.Column(db.String(3), db.ForeignKey('missions.mission_cat')) 
-    ntsee_code = db.Column(db.String(3), nullable=True)
-    project_type = db.Column(db.String(50))
+    mission_cat = db.Column(db.String(3), db.ForeignKey('missions.mission_cat'))
     interest_id = db.Column(db.Integer, db.ForeignKey('interests.interest_id'))
-    ntsee_code = db.Column(db.String(3))
     contact = db.Column(db.String(50))
     exec_sum = db.Column(db.String(50))
     region = db.Column(db.String, nullable=True)
