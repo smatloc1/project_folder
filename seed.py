@@ -15,7 +15,6 @@ model.connect_to_db(server.app)
 model.db.create_all()
 
 ###### Load org data from JSON file ######
-# url = https://api.data.charitynavigator.org/v2/Organizations?app_id=a2159908&app_key=4e6d76d82c65e55609abe51e36f9d072&search=organizations&scopeOfWork=National&sort=Name
 
 #with open(**??**'data/movies.sjon'**??**) as f:   
 #     org_data = json.loads(f.read())
