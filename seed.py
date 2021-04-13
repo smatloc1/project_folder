@@ -16,6 +16,7 @@ model.db.create_all()
 
 ###### Load org data from JSON file ######
 
+#
 #with open(**??**'data/movies.sjon'**??**) as f:   
 #     org_data = json.loads(f.read())
 
