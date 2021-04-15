@@ -45,7 +45,7 @@ class Org(db.Model):
     org_name = db.Column(db.String(50), nullable=False, unique=True)
     mission = db.Column(db.String(200))
     cause_id = db.Column(db.Integer, db.ForeignKey('causes.cause_id'))
-    cat_id = db.Column(db.Integer, db.ForeignKey('categories.cat_id'))
+    #cat_id = db.Column(db.Integer, db.ForeignKey('categories.cat_id'))
     #web_url = db.Column(db.String(100)) - SPRINT 2
     #tagline = db.Column(db.String(100)) - SPRINT 2
     

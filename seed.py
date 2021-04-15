@@ -1,7 +1,7 @@
 """Script to seed database."""
 
 import os
-import json
+#import json
 from random import choice, randint
 
 import crud
@@ -18,32 +18,25 @@ model.db.create_all()
 
 ###########    #1. Create a new cause        #########################
 
-test_cause3 = create_cause('youth development')
+cause1 = crud.create_cause('Religious Activities')
 
-cause4 = create_cause('Religious Activities')
-
-cause5 = create_cause('Scholarship and Financial Support')
+cause2 = crud.create_cause('Scholarship and Financial Support')
 
 
 
 ###########    #2. Create a new org using cause_obj    ###############
 
-test_org2 = create_org_with_cause_obj(org_name='100 Men', cause_obj=test_cause2, mission='To help youth in crisis')
-
-org4=create_org_with_cause_obj(org_name='I Have a Dream Foundation', cause_obj=cause5, 
+org1=crud.create_org_with_cause_obj(org_name='I Have a Dream Foundation', cause_obj=cause2, 
                 mission="Empowering children in low-income communities to achieve higher education")
 
-org5=create_org_with_cause_obj(org_name='18 Doors', cause_obj=cause4, 
+org2=crud.create_org_with_cause_obj(org_name='18 Doors', cause_obj=cause1, 
                 mission='Empower people in interfaith relationships to engage in Jewish life')
 
 
 
 ###########   #3. Create a new org using a cause_id    ###############
 
-test_org3 = create_org_with_cause_id(org_name='FBTB,inc', cause_id=3,
-                mission='Helping families with youth in crisis')
-
-org6=create_org_with_cause_id(org_name='After-School All-Stars', cause_id=3, 
+org6=crud.create_org_with_cause_id(org_name='After-School All-Stars', cause_id=2, 
                 mission='To provide comprehensive after-school programs that keep children safe and help them succeed in school and life')
  
 
