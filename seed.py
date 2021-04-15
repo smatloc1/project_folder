@@ -14,35 +14,52 @@ os.system('createdb mmdata')
 model.connect_to_db(server.app)
 model.db.create_all()
 
-###### Load org data from JSON file ######
 
-#
-#with open(**??**'data/movies.sjon'**??**) as f:   
-#     org_data = json.loads(f.read())
 
-###### Create np orgs, store them in list so we can use them ######
+###########    #1. Create a new cause        #########################
 
-movies_in_db = []
-for movie in movie_data:
-    title, overview, poster_path = (movie['title'],
-                                    movie['overview'],
-                                    movie['poster_path'])
-    release_date = datetime.strptime(movie['release_date'], '%Y-%m-%d')
+test_cause3 = create_cause('youth development')
 
-    db_movie = crud.create_movie(title,
-                                 overview,
-                                 release_date,
-                                 poster_path)
-    movies_in_db.append(db_movie)
+cause4 = create_cause('Religious Activities')
 
-for n in range(10):
-    email = f'user{n}@test.com'  # Voila! A unique email!
-    password = 'test'
+cause5 = create_cause('Scholarship and Financial Support')
 
-    user = crud.create_user(email, password)
 
-    for _ in range(10):
-        random_movie = choice(movies_in_db)
-        score = randint(1, 5)
 
-        crud.create_rating(user, random_movie, score)
+###########    #2. Create a new org using cause_obj    ###############
+
+test_org2 = create_org_with_cause_obj(org_name='100 Men', cause_obj=test_cause2, mission='To help youth in crisis')
+
+org4=create_org_with_cause_obj(org_name='I Have a Dream Foundation', cause_obj=cause5, 
+                mission="Empowering children in low-income communities to achieve higher education")
+
+org5=create_org_with_cause_obj(org_name='18 Doors', cause_obj=cause4, 
+                mission='Empower people in interfaith relationships to engage in Jewish life')
+
+
+
+###########   #3. Create a new org using a cause_id    ###############
+
+test_org3 = create_org_with_cause_id(org_name='FBTB,inc', cause_id=3,
+                mission='Helping families with youth in crisis')
+
+org6=create_org_with_cause_id(org_name='After-School All-Stars', cause_id=3, 
+                mission='To provide comprehensive after-school programs that keep children safe and help them succeed in school and life')
+ 
+
+ 
+######## EX: How to use the cause relationship from an org to call the cause_name #####
+
+# test_org2.cause.cause_name  
+#'youth development'
+   
+######## EX:  How to query for all orgs with that have test_cause2; it returns a list of all the orgs ####### 
+
+#  test_cause2.orgs    
+#[<Org org_id=2, org_name=100 Men, misssion=To help youth in crisis, cause_id=3>, <Org org_id=3, org_name=FBTB,inc, misssion=Helping families with youth in crisis, cause_id=3>]
+ 
+######## EX:  How to modify an attibute once its been created
+
+#test_cause2.cause_name='youth and family support'
+#db.session.add(test_cause2)
+#db.session.commit()

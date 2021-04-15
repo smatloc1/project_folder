@@ -2,18 +2,41 @@
 
 from model import db, Org, Cat, Cause, connect_to_db
 
-#def create_org(org_name, cause, category, mission):
-    #"""Create and return a new organization."""
+def create_org_with_cause_id(org_name, cause_id, mission):
+    """Create and return a new organization."""
 
-    #org = Org(org_name=org_name,
-                  #cause=cause,
-                  #category=category,
-                  #mission=mission)
+    org = Org(org_name=org_name, 
+                  cause_id=cause_id,
+                  mission=mission)
 
-    #db.session.add(org)
-    #db.session.commit()
+    db.session.add(org)
+    db.session.commit()
 
-    #return org
+    return org
+
+### cause_obj parameter is a cause object not a string
+
+def create_org_with_cause_obj(org_name, cause_obj, mission):
+    """Create and return a new organization."""
+
+    org = Org(org_name=org_name, 
+                  cause=cause_obj,
+                  mission=mission)
+
+    db.session.add(org)
+    db.session.commit()
+
+    return org
+
+def create_cause(cause_name):
+    """Create and return a new cause."""
+
+    cause = Cause(cause_name=cause_name) 
+                  
+    db.session.add(cause)
+    db.session.commit()
+
+    return cause
 
 
 def get_orgs():
@@ -28,10 +51,10 @@ def get_org_by_name(org_name):
     return Org.query.get(org_name)
 
 
-def get_org_by_cause(cause_name):
-    """Return a organization by cause."""
+#def get_org_by_cause(cause_id):
+ #   """Return a organization by cause."""
 
-    return Org.query.filter(Org.cause == cause_name).first()
+  #  return Org.query.filter(Org.cause == cause_name).first()
 
 
 if __name__ == '__main__':
