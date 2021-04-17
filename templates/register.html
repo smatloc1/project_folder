@@ -1,25 +1,28 @@
-!doctype html>
-<html>
-<head>
+{% extends 'base.html' %}
+{% block title %}Mighty Missions Registration{% endblock %}
+
+{% block body %}
   <title>Registration</title>
-</head>
-<body>
-
-<form action="/">
   
-  <p><label>Organization: <input type="text" name='org_name'></label></p>
-  
-  <p><label>Mission: <input type="text" name="mission"></label></p>
-  
-  <p><label>Cause:</label> <select>
+  <h1>Welcome!</h1>
 
-    <option value="1"></option>
-    <option value="2"></option>
-
-  </select>
+  <form action="/formdata">
   
-  <p><input type="submit"></p>
-</form>
+    <p><label>Organization: <input type="text" name='org_name'></label></p>
+  
+    <p><label>Mission: <input type="text" name="mission"></label></p>
+  
+    <p><label>Cause:</label> <select>
 
-</body>
-</html>
+        <option value="cause1"></option>
+        <option value="cause2"></option>
+        <option value="cause3"></option>
+        <option value="cause4"></option>
+        <option value="cause5"></option>
+
+    </select>
+  
+    <p><input type="submit"></p>
+  </form>
+
+{% endblock %}

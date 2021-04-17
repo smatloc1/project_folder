@@ -13,7 +13,7 @@ app.jinja_env.undefined = StrictUndefined
 
 
 
-###########   Returns the Homepage    #################
+################       Main Homepage        ####################
 
 @app.route('/')
 def homepage():
@@ -23,62 +23,106 @@ def homepage():
 
 
 
+#################  Login to the Homepage  #################
 
-@app.route('/list_orgs')
-def all_orgs():
-    """ List all organizations by cause """
+@app.route('/login', methods=['POST'])
+def login_org():
+    """ Organization enters org_name and a search is completed """
+      
+    org_name = request.form.get('org_name')
+    org = crud.get_org_by_name(org_name)
+    
+    if not org:
+         
+        flash('This organization does not exist in our database.')
+        return redirect('/register.html')
+    
+    else:
+        return redirect(f'/profiles/{org_name}')
+ 
 
-    orgs = crud.get_orgs()       
 
-    return render_template('list_orgs.html', orgs=orgs)
+###########   Retrieve data from register  ###################
+
+@app.route('/formdata', methods=['POST'])
+def new_org_formdata():
+    """ Create a new org. """
+
+    org_name = request.form.get('org_name')
+    mission = request.form.get('mission')
+    cause_id = request.form.get('cause_id')
+
+    org = crud.get_org_by_name(org_name)
+    if org:
+         
+        flash('Congratulations!  You have now been added to the Mighty Missions database.')
+        return redirect('/homepage')
 
 
 
 ##############   Returns a profile page   #################
 
-@app.route('/orgs/<org_id>')
+@app.route('/profiles', methods=['GET'])
 def show_org(org_name):
-    """Show details on a particular organization."""
+    """ Show details on a particular organization."""
 
     org = crud.get_org_by_name(org_name)
 
-    return render_template('org_profile.html', org=org)
+    return render_template('profiles.html', org=org)
 
 
 
+##############  Main Search Page ##########################
 
-###########   Create a new organization  ###################
+@app.route('/search', methods=['GET'])
+def search():
 
-@app.route('/login', methods=['POST'])
-def register_new_org():
-    """Create a new org."""
+    """ Render the Search page """
 
-    org_name = request.form.get('org_name')
-    mission = request.form.get('mission')
-    #cause_id = request.form.get('cause_id')
+    return render_template('search.html')
 
+
+##############   Returns a list of orgs page   #################
+
+@app.route('/listoforgs')
+def all_orgs():
+    """ Search all organizations by name """
+
+    orgs = crud.get_orgs()       
+
+    return render_template('listoforgs.html', orgs=orgs)
+
+
+
+##############   Search by Cause ##########################
+
+@app.route('/searchbycause', methods=['POST'])
+def same_orgs_by_cause():
+    """ Search for organizations by cause """
+
+    cause = request.form.get('cause')
+    orgs = crud.get_orgs_by_cause(cause)
+
+    return render_template('searchbycause.html', orgs=orgs)
+
+
+
+##############   Search by Name ##########################
+
+@app.route('/searchbyname', methods=['POST'])
+def org_by_name():
+    """ Search for an organization by name """
+
+    org = request.form.get('org_name')
     org = crud.get_org_by_name(org_name)
-    if not org:
-         
-        flash('This organization does not exist in our database.')
-        return redirect('/register')
- 
-    else:
-        return redirect('/search')
 
-#create a route to accept the information from register
+    return redirect(f'/profiles/{org_name}')
 
-##### this belongs to@app.route(handle registerdata)   
-        #crud.create_org_with_cause_id(org_name, cause_id, mission)
-        #flash('Congratulations! Your organization has been added to our database! You can now search for other organizations that have a similar mission and cause.')
 
-   
-        
-
-    return redirect('/')
 
 
 
 if __name__ == '__main__':
     connect_to_db(app)
+    print("this is the server running")
     app.run(host='0.0.0.0', debug=True)

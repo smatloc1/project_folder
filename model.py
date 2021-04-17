@@ -6,18 +6,18 @@ db = SQLAlchemy()
 
 
 
-class Cat(db.Model):
-    """ Organization category """
+#class Cat(db.Model):
+#   """ Organization category """
 
-    __tablename__ = "categories"
+#  __tablename__ = "categories"
 
-    cat_id = db.Column(db.Integer, primary_key=True)
-    cat_name = db.Column(db.String(50), nullable=False)
+#   cat_id = db.Column(db.Integer, primary_key=True)
+#   cat_name = db.Column(db.String(50), nullable=False)
 
     # orgs = a list of Org objects
 
-    def __repr__(self):
-        return f'<Cat cat_id = {self.cat_id}, cat_name = {self.cat_name}>'
+#    def __repr__(self):
+#         return f'<Cat cat_id = {self.cat_id}, cat_name = {self.cat_name}>'
   
 
 class Cause(db.Model):
@@ -27,7 +27,7 @@ class Cause(db.Model):
 
     cause_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     cause_name = db.Column(db.String(50), nullable=False)
-    cat_id = db.Column(db.Integer, db.ForeignKey('categories.cat_id'))
+    #cat_id = db.Column(db.Integer, db.ForeignKey('categories.cat_id'))
  
     # orgs = a list of Org objects
 
@@ -51,7 +51,7 @@ class Org(db.Model):
     
 
     cause = db.relationship('Cause', backref='orgs')
-    cat = db.relationship('Cat', backref='orgs')
+    #cat = db.relationship('Cat', backref='orgs')
 
 
 

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Mighty Missions Search Page{% endblock %}
+
+{% block body %}
+  
+    <h1>Mighty Missions Search Page</h1>
+
+
+    <div>
+      
+    Mighty Missions is created to help organizations like yours find and connect with other
+    organizations with the same mission and cause.  We believe these connections will bring
+    a greater reward and enable you to increase your ability to meet the needs of your community. 
+       
+    </div>
+
+
+    <form action="/listoforgs" method="POST">
+    
+    <p>
+        <p><label>To retrieve a list of all organizations in the Mighty Missions database, click below:</label></p>
+    </p>
+
+    <p>
+        <input type="submit">
+    </p>
+    </form>
+
+
+    <form action="/searchbycause" method="POST">
+    
+    <p>
+        <p><label>Search by cause:</label> 
+           
+           <select name='cause'>
+            <option value="Religious Activities"></option>
+            <option value="cause2"></option>
+            <option value="cause3"></option>
+            <option value="cause4"></option>
+            <option value="cause5"></option>
+           </select>
+           
+            <input type="submit">
+        </p>
+        </form>
+
+    <form action="/searchbyname" method="POST">
+
+        <p><label>Search for an organization by Name:<input type="text" name='org_name'></label></p>
+                
+        <input type="submit">
+
+    </form>
+    
+
+{% endblock %}

@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of Organizations</title>
+{% extends 'base.html' %}
+{% block title %}Mighty Missions List of Organizations{% endblock %}
+
+
 </head>
 <body>
     {% for org in orgs %}
 
     <h1><label>Organization:</label>  {{org.org_name}} 
-    <h1><label>Organization ID:</label> {{org.org_i}d}
-    <h1><label>Mission:</label> {{org.mission}}
-    <h1><label>Cause:</label>  {{org.cause_name}}
+   
 
     </h1>
     {% endfor %}
