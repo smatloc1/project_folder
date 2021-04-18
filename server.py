@@ -32,6 +32,7 @@ def login_org():
     org_name = request.form.get('org_name')
     org = crud.get_org_by_name(org_name)
     
+    
     if not org:
          
         flash('This organization does not exist in our database.')
@@ -62,7 +63,7 @@ def new_org_formdata():
 
 ##############   Returns a profile page   #################
 
-@app.route('/profiles', methods=['GET'])
+@app.route('/profiles/<org_name>')
 def show_org(org_name):
     """ Show details on a particular organization."""
 
@@ -82,9 +83,10 @@ def search():
     return render_template('search.html')
 
 
+
 ##############   Returns a list of orgs page   #################
 
-@app.route('/listoforgs')
+@app.route('/list')
 def all_orgs():
     """ Search all organizations by name """
 
@@ -96,12 +98,12 @@ def all_orgs():
 
 ##############   Search by Cause ##########################
 
-@app.route('/searchbycause', methods=['POST'])
+@app.route('/searchbycause/<cause_obj>', methods=['GET'])
 def same_orgs_by_cause():
     """ Search for organizations by cause """
 
-    cause = request.form.get('cause')
-    orgs = crud.get_orgs_by_cause(cause)
+    cause_obj = request.form.get('cause_obj')
+    orgs = crud.get_orgs_by_cause(cause_obj)
 
     return render_template('searchbycause.html', orgs=orgs)
 
@@ -113,12 +115,10 @@ def same_orgs_by_cause():
 def org_by_name():
     """ Search for an organization by name """
 
-    org = request.form.get('org_name')
+    org_name = request.form.get('org_name')
     org = crud.get_org_by_name(org_name)
 
     return redirect(f'/profiles/{org_name}')
-
-
 
 
 

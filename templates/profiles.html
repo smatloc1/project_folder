@@ -5,27 +5,18 @@
 
     <h1>Mighty Missions Profile</h1>  
   
-    <h1><label>Organization:</label>  {{org.org_name}} 
-
-    <h1><label>Organization ID:</label> {{org.org_id}}
-
-    <h1><label>Mission:</label> {{org.mission}}
-
-    <h1><label>Cause:</label>  {{org.cause.cause_name}}
-
-    </h1>
+    <h2><label>Organization ID:</label>  {{org.org_id}} 
+    <h2><label>Organization Name:</label> {{org.org_name}}
+    <h2><label>Mission:</label> {{org.mission}}
+    <h2><label>Cause:</label>  {{org.cause.cause_name}}
+    </h2>
     
-    
+    <br><br>
     <form action="/search" method="GET">
-    <p>
-        <p><label>To search other organizations click below:</label></p>
-        
-    </p>
-    
-    <p>
-      <input type="submit">
-    </p>
-  </form>
-
+    <p><label>To search other organizations click submit below:</label></p>
+    <br><br>
+    <input type="submit" value="Submit">
+    </form>
+ 
 
 {% endblock %}

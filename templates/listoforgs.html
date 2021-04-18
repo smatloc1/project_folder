@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}Mighty Missions List of Organizations{% endblock %}
 
+{% block body %}
 
-</head>
-<body>
+    <h1>Mighty Missions List of Organizations</h1>  
+    <h2> 
     {% for org in orgs %}
 
-    <h1><label>Organization:</label>  {{org.org_name}} 
+    <h2>{{org.org_name}}</h2> 
    
 
-    </h1>
     {% endfor %}
 
-</body>
-</html>
+    <br><br>
+    <form action="/search" method="GET">
+    <p><label>To return to search page click submit below:</label></p>
+    <br><br>
+    <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}

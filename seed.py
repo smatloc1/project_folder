@@ -24,7 +24,6 @@ cause3 = crud.create_cause('Youth Development, Shelter, and Crisis Services')
 cause4 = crud.create_cause('Youth Education Programs and Services')
 cause5 = crud.create_cause('Social Services')
 
-
 ###########    #2. Create a new org using cause_obj    ###############
 
 org1=crud.create_org_with_cause_obj(org_name='I Have a Dream Foundation', cause_obj=cause2, 

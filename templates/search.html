@@ -15,42 +15,36 @@
     </div>
 
 
-    <form action="/listoforgs" method="POST">
-    
-    <p>
-        <p><label>To retrieve a list of all organizations in the Mighty Missions database, click below:</label></p>
-    </p>
-
-    <p>
-        <input type="submit">
-    </p>
+    <br><br>
+    <form action="/list" method="GET">
+    <p><label>To retrieve a list of all Mighty Missions organizations click submit below:</label></p>
+    <input type="submit">
     </form>
 
+    <br><br>
+    <form action="/searchbycause" method="GET">
+        <label for="cause_obj">Choose a cause:</label>
+        <select name="cause_obj" id="cause_obj">
+            <option value="Religious Activities">Religious Activities</option>
+            <option value="Scholarship and Financial Support">Scholarship and Financial Support</option>
+            <option value="Youth Development, Shelter, and Crisis Services">Youth Development, Shelter, and Crisis Services</option>
+            <option value="Youth Education Programs and Services">Youth Education Programs and Services</option>
+            <option value="Social Services">Social Services</option>
+        </select>
+        <input type="submit">
+    </form>
 
-    <form action="/searchbycause" method="POST">
-    
-    <p>
-        <p><label>Search by cause:</label> 
-           
-           <select name='cause'>
-            <option value="Religious Activities"></option>
-            <option value="cause2"></option>
-            <option value="cause3"></option>
-            <option value="cause4"></option>
-            <option value="cause5"></option>
-           </select>
-           
-            <input type="submit">
-        </p>
-        </form>
-
+    <br><br>
     <form action="/searchbyname" method="POST">
-
         <p><label>Search for an organization by Name:<input type="text" name='org_name'></label></p>
-                
         <input type="submit">
-
     </form>
     
+    <br><br>
+    <form action="/" method="GET">
+        <p><label>To return to homepage click submit below:</label></p>
+        <input type="submit" value="Submit">
+    </form>
+
 
 {% endblock %}
