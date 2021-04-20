@@ -8,7 +8,7 @@ import crud
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
-app.secret_key = "2455lb"
+app.secret_key = "2455lbkjfgjhfghkf"
 app.jinja_env.undefined = StrictUndefined
 
 
@@ -36,7 +36,7 @@ def login_org():
     if not org:
          
         flash('This organization does not exist in our database.')
-        return redirect('/register.html')
+        return render_template('register.html')
     
     else:
         return redirect(f'/profiles/{org_name}')
@@ -45,7 +45,7 @@ def login_org():
 
 ###########   Retrieve data from register  ###################
 
-@app.route('/formdata', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def new_org_formdata():
     """ Create a new org. """
 
@@ -98,15 +98,21 @@ def all_orgs():
 
 ##############   Search by Cause ##########################
 
-@app.route('/searchbycause/<cause_obj>', methods=['GET'])
-def same_orgs_by_cause():
-    """ Search for organizations by cause """
+@app.route('/cause', methods=['GET'])
+def search_orgs_by_cause():
+     """ Search for organizations by cause """
 
-    cause_obj = request.form.get('cause_obj')
-    orgs = crud.get_orgs_by_cause(cause_obj)
+     cause_name = request.form.get('cause_name')
+     cause_obj = crud.get_cause_by_name(cause_name)
+  
+     orgs = crud.get_orgs_by_cause(cause_obj)
 
-    return render_template('searchbycause.html', orgs=orgs)
+     return render_template('searchbycause.html', orgs=orgs)
 
+#@app.route('/test/', methods=["POST"])
+#def show_orgs_by_cause():
+
+ #   return "this url worked"
 
 
 ##############   Search by Name ##########################

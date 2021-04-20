@@ -55,6 +55,7 @@ class Org(db.Model):
 
 
 
+
     def __repr__(self):
         return f'<Org org_id={self.org_id}, org_name={self.org_name}, misssion={self.mission}, cause_id={self.cause_id}>'
 

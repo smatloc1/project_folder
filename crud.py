@@ -51,10 +51,18 @@ def get_org_by_name(org_name):
     return Org.query.filter(Org.org_name == org_name).first()
 
 
-def get_orgs_by_cause(cause_obj):
+def get_orgs_by_cause(cause_name):
    """Return a list of organizations by cause."""
  
-   return Org.query.filter(Org.cause == cause_obj)
+   return Org.query.filter(Org.cause == cause_name)
+
+
+def get_cause_by_name(cause_name):
+    """ Return a cause by name."""
+
+    return Cause.query.filter(Cause.cause_name == cause_name).first()
+
+
 
 
 if __name__ == '__main__':

@@ -3,11 +3,14 @@
 
 {% block body %}
  
-    <h1>Mighty Mission Organizations by Cause:</h1>
-
+    <h1>Mighty Mission Organizations Related by Cause</h1>
+        
+     
     {% for org in orgs %}
 
-    <h2><label>Cause:</label>  {{Org.causes.cause_obj}}
+    <h2><label>Cause:</label>  
+        
+        {{org}}
     </h2>
 
     {% endfor %}
