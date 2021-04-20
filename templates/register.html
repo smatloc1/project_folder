@@ -4,25 +4,32 @@
 {% block body %}
   <title>Registration</title>
   
-  <h1>Welcome!</h1>
+  <h1>Mighty Missions Registration</h1>
 
-  <form action="/register">
+  <div>
+    
+    <p>This organization does not exist in our database.  To add this organization, please enter your information below:</p>
+   
+    </div>
+
+  <form action="/createorg", method='POST'>
   
     <p><label>Type in the name of your Organization: <input type="text" name='org_name'></label></p>
   
     <p><label>Type in your Mission Statement: <input type="text" name="mission"></label></p>
   
-    <p><label>Select the Cause Area of your Organization:</label> <select>
+    <p><label>Select the Cause Area of your Organization:</label></p>
 
-        <option value="cause1"></option>
-        <option value="cause2"></option>
-        <option value="cause3"></option>
-        <option value="cause4"></option>
-        <option value="cause5"></option>
+    <p><label for="cause_id">Choose a cause:</label></p>
+          <select name="cause_id" id="cause_id">
+              <option value="1">Religious Activities</option>
+              <option value="2">Scholarship and Financial Support</option>
+              <option value="3">Youth Development, Shelter, and Crisis Services</option>
+              <option value="4">Youth Education Programs and Services</option>
+              <option value="5">Social Services</option>
+          </select>
+          <input type="submit">
+      </form>
 
-    </select>
-  
-    <p><input type="submit"></p>
-  </form>
 
 {% endblock %}

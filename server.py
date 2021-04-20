@@ -17,49 +17,67 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
-    """Welcome Page."""
+    """Welcome Page and login."""
 
     return render_template('homepage.html')
 
+#################  Display registration form ##############
+
+@app.route('/registrationform')
+def reg_form():
+    
+    return render_template('register.html')
 
 
-#################  Login to the Homepage  #################
 
-@app.route('/login', methods=['POST'])
+#################  Retrieve data from Homepage (login form)  #################
+
+@app.route('/login', methods=['GET'])
 def login_org():
     """ Organization enters org_name and a search is completed """
       
-    org_name = request.form.get('org_name')
+    org_name = request.args.get('org_name')
     org = crud.get_org_by_name(org_name)
     
     
     if not org:
          
-        flash('This organization does not exist in our database.')
-        return render_template('register.html')
+        return redirect('/registrationform')
     
     else:
         return redirect(f'/profiles/{org_name}')
  
 
 
-###########   Retrieve data from register  ###################
+###########   Retrieve data from register and create an org ###################
 
-@app.route('/register', methods=['POST'])
-def new_org_formdata():
+@app.route('/createorg', methods=['POST'])
+def create_org_registration():
     """ Create a new org. """
 
     org_name = request.form.get('org_name')
     mission = request.form.get('mission')
     cause_id = request.form.get('cause_id')
 
-    org = crud.get_org_by_name(org_name)
+    print('*'*20)
+    print(org_name, mission, cause_id)
+
+    org = crud.create_org_with_cause_id(org_name, cause_id, mission)
+    
     if org:
          
         flash('Congratulations!  You have now been added to the Mighty Missions database.')
-        return redirect('/homepage')
+        return redirect(f'/profiles/{org.org_name}')
 
+    flash('oops!')
+    return redirect('/registrationform')
+    
 
+     #cause_name = request.args.get('cause_name')
+     #cause_obj = crud.get_cause_by_name(cause_name)
+     #orgs = crud.get_orgs_by_cause(cause_obj)
+    
+     #return render_template('searchbycause.html', orgs=cause_obj.orgs)
 
 ##############   Returns a profile page   #################
 
@@ -102,12 +120,11 @@ def all_orgs():
 def search_orgs_by_cause():
      """ Search for organizations by cause """
 
-     cause_name = request.form.get('cause_name')
+     cause_name = request.args.get('cause_name')
      cause_obj = crud.get_cause_by_name(cause_name)
-  
      orgs = crud.get_orgs_by_cause(cause_obj)
-
-     return render_template('searchbycause.html', orgs=orgs)
+    
+     return render_template('searchbycause.html', orgs=cause_obj.orgs)
 
 #@app.route('/test/', methods=["POST"])
 #def show_orgs_by_cause():

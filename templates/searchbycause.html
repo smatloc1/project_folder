@@ -3,17 +3,23 @@
 
 {% block body %}
  
-    <h1>Mighty Mission Organizations Related by Cause</h1>
-        
-     
+    <h1>Mighty Missions Organizations Related by Cause:</h1>  
+    <h2> 
     {% for org in orgs %}
 
-    <h2><label>Cause:</label>  
-        
-        {{org}}
-    </h2>
+    <h2>{{org.org_name}}</h2> 
+
 
     {% endfor %}
 
-{% endblock %}    
 
+
+<br><br>
+<form action="/search" method="GET">
+<p><label>To return to search page click submit below:</label></p>
+<br><br>
+<input type="submit" value="Submit">
+</form>
+
+
+{% endblock %}
