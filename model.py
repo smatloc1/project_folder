@@ -4,20 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-
-
-#class Cat(db.Model):
-#   """ Organization category """
-
-#  __tablename__ = "categories"
-
-#   cat_id = db.Column(db.Integer, primary_key=True)
-#   cat_name = db.Column(db.String(50), nullable=False)
-
-    # orgs = a list of Org objects
-
-#    def __repr__(self):
-#         return f'<Cat cat_id = {self.cat_id}, cat_name = {self.cat_name}>'
   
 
 class Cause(db.Model):
@@ -27,9 +13,7 @@ class Cause(db.Model):
 
     cause_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     cause_name = db.Column(db.String(50), nullable=False)
-    #cat_id = db.Column(db.Integer, db.ForeignKey('categories.cat_id'))
- 
-    # orgs = a list of Org objects
+  
 
     def __repr__(self):
         return f'<Cause cause_id={self.cause_id}, cause_name={self.cause_name}>'
@@ -37,7 +21,7 @@ class Cause(db.Model):
  
   
 class Org(db.Model):
-    """ Nonprofit Organization Profile """
+    """ An Organization Profile """
 
     __tablename__ = "orgs"
 
@@ -45,13 +29,12 @@ class Org(db.Model):
     org_name = db.Column(db.String(50), nullable=False, unique=True)
     mission = db.Column(db.String(200))
     cause_id = db.Column(db.Integer, db.ForeignKey('causes.cause_id'))
-    #cat_id = db.Column(db.Integer, db.ForeignKey('categories.cat_id'))
-    #web_url = db.Column(db.String(100)) - SPRINT 2
-    #tagline = db.Column(db.String(100)) - SPRINT 2
+    org_image = db.Column(db.String)
+    web_url = db.Column(db.String) 
+    tagline = db.Column(db.String(100)) - SPRINT 2
     
 
     cause = db.relationship('Cause', backref='orgs')
-    #cat = db.relationship('Cat', backref='orgs')
 
 
 

@@ -15,7 +15,7 @@ app.jinja_env.undefined = StrictUndefined
 
 ################       Main Homepage        ####################
 
-@app.route('/')
+@app.route('/mightymissions')
 def homepage():
     """Welcome Page and login."""
 
