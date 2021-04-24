@@ -15,7 +15,7 @@ app.jinja_env.undefined = StrictUndefined
 
 ################       Main Homepage        ####################
 
-@app.route('/mightymissions')
+@app.route('/')
 def homepage():
     """Welcome Page and login."""
 
@@ -37,15 +37,15 @@ def login_org():
     """ Organization enters org_name and a search is completed """
       
     org_name = request.args.get('org_name')
-    org = crud.get_org_by_name(org_name)
+    org = crud.get_org_by_name(org_name.lower())
     
     
     if not org:
-         
+        flash('oops!' 'This organization does not exist')
         return redirect('/registrationform')
     
     else:
-        return redirect(f'/profiles/{org_name}')
+        return redirect(f'/profiles/{org.org_name}')
  
 
 
@@ -58,26 +58,25 @@ def create_org_registration():
     org_name = request.form.get('org_name')
     mission = request.form.get('mission')
     cause_id = request.form.get('cause_id')
+    web_url = request.form.get('web_url')
+    tagline = request.form.get('tagline')
+    image = request.form.get('image')
 
     print('*'*20)
     print(org_name, mission, cause_id)
+    org = crud.get_org_by_name(org_name.lower())
 
-    org = crud.create_org_with_cause_id(org_name, cause_id, mission)
-    
-    if org:
-         
-        flash('Congratulations!  You have now been added to the Mighty Missions database.')
-        return redirect(f'/profiles/{org.org_name}')
+    if not org:
+        new_org = crud.create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline, image)
+        flash('CONGRATULATIONS!  YOU HAVE NOW BEEN ADDED TO THE MIGHTY MISSIONS NETWORK.')
+        return redirect(f'/profiles/{new_org.org_name}')
+    else: 
+        flash('THIS ORGANIZATION ALREADY EXISTS IN OUR NETWORK.')
+        return render_template('homepage.html')        
 
-    flash('oops!')
-    return redirect('/registrationform')
+   
     
 
-     #cause_name = request.args.get('cause_name')
-     #cause_obj = crud.get_cause_by_name(cause_name)
-     #orgs = crud.get_orgs_by_cause(cause_obj)
-    
-     #return render_template('searchbycause.html', orgs=cause_obj.orgs)
 
 ##############   Returns a profile page   #################
 
@@ -102,7 +101,7 @@ def search():
 
 
 
-##############   Returns a list of orgs page   #################
+##############   Returns a list of orgs page **UNIT TEST**  #################
 
 @app.route('/list')
 def all_orgs():
@@ -114,7 +113,7 @@ def all_orgs():
 
 
 
-##############   Search by Cause ##########################
+##############   Search by Cause ** INTEGRATION TEST*** ################################
 
 @app.route('/cause', methods=['GET'])
 def search_orgs_by_cause():

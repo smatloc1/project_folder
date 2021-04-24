@@ -2,12 +2,15 @@
 
 from model import db, Org, Cause, connect_to_db
 
-def create_org_with_cause_id(org_name, cause_id, mission):
+def create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline, image):
     """Create and return a new organization."""
 
-    org = Org(org_name=org_name, 
+    org = Org(org_name=org_name.lower(), 
                   cause_id=cause_id,
-                  mission=mission)
+                  mission=mission,
+                  web_url=web_url,
+                  tagline=tagline,
+                  image=image)
 
     db.session.add(org)
     db.session.commit()
@@ -16,12 +19,15 @@ def create_org_with_cause_id(org_name, cause_id, mission):
 
 ### cause_obj parameter is a cause object not a string
 
-def create_org_with_cause_obj(org_name, cause_obj, mission):
+def create_org_with_cause_obj(org_name, cause_obj, mission, web_url, tagline, image):
     """Create and return a new organization."""
 
-    org = Org(org_name=org_name, 
+    org = Org(org_name=org_name.lower(), 
                   cause=cause_obj,
-                  mission=mission)
+                  mission=mission,
+                  web_url=web_url,
+                  tagline=tagline,
+                  image=image)
 
     db.session.add(org)
     db.session.commit()
