@@ -51,11 +51,11 @@ class Org(db.Model):
 #    Org.query.delete()
 
    # Add sample causes and organizations
-#    animal_rescue= Cause(dept_code='fin', dept='Finance', phone='555-1000')
-#    women_crisis= Cause(dept_code='legal', dept='Legal', phone='555-2222')
-#    senior_svcs= Cause(dept_code='mktg', dept='Marketing', phone='555-9999')
+#    animal_rescue= Cause(ecause_id='6')
+#    women_crisis= Cause(cause_id='7)
+#    senior_svcs= Cause(cause_id='8')
 
-#    leonard = Employee(name='Leonard', dept=dl)
+#    DIVAS = Org(name='Leonard', dept=dl)
 #    liz = Employee(name='Liz', dept=dl)
 #    maggie = Employee(name='Maggie', dept=dm)
 #    nadine = Employee(name='Nadine')

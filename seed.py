@@ -13,7 +13,20 @@ os.system('createdb mmdata')
 
 model.connect_to_db(server.app)
 model.db.create_all()
+"""
+import requests lib
 
+reposne = use requests.get to query your api (adding key value pairs to narrow search to MI or whatever)
+
+user method from requests lib to turn the response into (nested) dictionary (probably uses json.load???)
+see apis lecture notes
+url = [some sting tha tis the base url)]
+payload = {"zipcode": "94803", "scopeOfWork":"REQIOINAL", "api_key": [your key here]}
+# keys as defined by api
+request.get(url, payload)
+
+
+""""
 
 
 ###########    #1. Create a new cause        #########################

@@ -4,7 +4,9 @@ from flask import (Flask, render_template, request, flash, session,
                    redirect)
 from model import connect_to_db
 import crud
-
+from pprint import pformat
+import os
+import requests
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
@@ -21,7 +23,7 @@ def homepage():
 
     return render_template('homepage.html')
 
-#################  Display registration form ##############
+#################  Display registration form ################################
 
 @app.route('/registrationform')
 def reg_form():
@@ -41,7 +43,7 @@ def login_org():
     
     
     if not org:
-        flash('oops!' 'This organization does not exist')
+        flash('THIS ORGANIZATION IS NOT REGISTERED IN OUR DATABASE')
         return redirect('/registrationform')
     
     else:
@@ -83,9 +85,10 @@ def create_org_registration():
 @app.route('/profiles/<org_name>')
 def show_org(org_name):
     """ Show details on a particular organization."""
-
-    org = crud.get_org_by_name(org_name)
-
+    print("THIS IS FOR DEBUGGING\n\n\n\n\n\n")
+    print(org_name)
+    org = crud.get_org_by_name(org_name.lower())
+    print(org)
     return render_template('profiles.html', org=org)
 
 
@@ -123,7 +126,7 @@ def search_orgs_by_cause():
      cause_obj = crud.get_cause_by_name(cause_name)
      orgs = crud.get_orgs_by_cause(cause_obj)
     
-     return render_template('searchbycause.html', orgs=cause_obj.orgs)
+     return render_template('searchbycause.html', cause_obj=cause_obj)
 
 #@app.route('/test/', methods=["POST"])
 #def show_orgs_by_cause():
@@ -131,14 +134,18 @@ def search_orgs_by_cause():
  #   return "this url worked"
 
 
-##############   Search by Name ##########################
+##############   Search by Name  INTEGRATION TEST  ##########################
 
 @app.route('/searchbyname', methods=['POST'])
 def org_by_name():
     """ Search for an organization by name """
 
     org_name = request.form.get('org_name')
-    org = crud.get_org_by_name(org_name)
+    org = crud.get_org_by_name(org_name.lower())
+
+    if not org:
+        flash('This organization does not exist')
+        return render_template('search.html')
 
     return redirect(f'/profiles/{org_name}')
 
