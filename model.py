@@ -42,32 +42,6 @@ class Org(db.Model):
         return f'<Org org_id={self.org_id}, org_name={self.org_name}, misssion={self.mission}, cause_id={self.cause_id}>'
 
 
-#############################   Create sample_data for tests.py  #########################################
-
-#    """Create some sample data."""
-
-    # In case this is run more than once, empty out existing data
-#    Cause.query.delete()
-#    Org.query.delete()
-
-   # Add sample causes and organizations
-#    animal_rescue= Cause(ecause_id='6')
-#    women_crisis= Cause(cause_id='7)
-#    senior_svcs= Cause(cause_id='8')
-
-#    DIVAS = Org(name='Leonard', dept=dl)
-#    liz = Employee(name='Liz', dept=dl)
-#    maggie = Employee(name='Maggie', dept=dm)
-#    nadine = Employee(name='Nadine')
-
-#    db.session.add_all([df, dl, dm, leonard, liz, maggie, nadine])
-#    db.session.commit()
-
-
-
-
-
-
 
 def connect_to_db(app, db_name='postgresql:///mmdata', echo=False):
     """Connect to database """
@@ -87,5 +61,4 @@ if __name__ == '__main__':
     from server import app
 
     connect_to_db(app)
-    
-
+   

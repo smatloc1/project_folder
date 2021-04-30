@@ -9,8 +9,7 @@ def create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline, imag
                   cause_id=cause_id,
                   mission=mission,
                   web_url=web_url,
-                  tagline=tagline,
-                  image=image)
+                  tagline=tagline)
 
     db.session.add(org)
     db.session.commit()
@@ -26,8 +25,7 @@ def create_org_with_cause_obj(org_name, cause_obj, mission, web_url, tagline, im
                   cause=cause_obj,
                   mission=mission,
                   web_url=web_url,
-                  tagline=tagline,
-                  image=image)
+                  tagline=tagline)
 
     db.session.add(org)
     db.session.commit()
