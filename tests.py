@@ -6,22 +6,34 @@ from server import app
 import server
 
 
-class FlaskTests(TestCase):
+
+##################    Integration Test #1 - create a new org    ######################
+
+class FlaskTestsNeworg(TestCase):
     def setUp(self):
         """Stuff to do before every test."""
 
-        # Get the Flask test client
         self.client = app.test_client()
-
-        # Show Flask errors that happen during tests
         app.config['TESTING'] = True
 
-        # Connect to test database
         connect_to_db(app, "postgresql:///sample_data")
 
-        # Create tables and add sample data
         db.create_all()
-        example_data()
+        sample_data()
+
+
+    def test_create_new_org(self):
+        """Can we create a new organization and save it to the database?"""
+
+        result = self.client.post('/createorg',
+                                  data={'org_name':'DIVAS', 
+                                  'cause_id': 5,
+                                  'mission':'To educate, encourage, and empower women to be their best',
+                                  'web_url':"",
+                                  'tagline': 'All women succeeding',
+                                  'image':""} 
+                                  follow_redirects=False)
+        self.assertIn(b"Mighty Missions Registration", result.data)
 
     def tearDown(self):
         """Do at end of every test."""
@@ -29,45 +41,68 @@ class FlaskTests(TestCase):
         db.session.close()
         db.drop_all()
 
-############################  Unit Test #1 - Homepage  #########################
-
-    def test_homepage(self):
-        """Can we reach the homepage?"""
-
-        result = self.client.get("/")
-        self.assertIn(b"Welcome to Mighty Missions Network!", result.data)
+############################  Unit Test #2 - return a profile page  #########################
 
 
+class FlaskTestsProfile(TestCase):
+    def setUp(self):
+        """Stuff to do before every test."""
 
-##################    Integration Test #2 - Create a new org    #######################
+        self.client = app.test_client()
+        app.config['TESTING'] = True
 
-    def test_create_new_org(self):
-        """Create a new organization"""
+        connect_to_db(app, "postgresql:///sample_data")
 
-        result = self.client.post('/createorg',
-                                  data="org_name",
-                                  follow_redirects=True)
-        self.assertIn(b"Type in your organization name", result.data)
+        db.create_all()
+        sample_data()
 
+    def test_profilepage(self):
+        """Can we retrieve the details of an organization?"""
 
+        result = self.client.get('/profiles/DIVAS')
+        self.assertIn(b"Mighty Missions Profile", result.data)
 
-####################  Integration Test #3 - Registration Form Page  ##################
+ def tearDown(self):
+        """Do at end of every test."""
 
-    def test_registration_form(self):
-        """Can we reach the registration page?"""
-
-        result = self.client.get('/registrationform')
-        self.assertIn(b'Mighty Missions Registration', result.data)
-
-
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-    unittest.main()
+        db.session.close()
+        db.drop_all()
     
+
+
+####################  Unit Test #3 - search by cause  ##################
+
+class FlaskTestsSearchbyname(TestCase):
+    def setUp(self):
+        """Stuff to do before every test."""
+
+        self.client = app.test_client()
+        app.config['TESTING'] = True
+
+        connect_to_db(app, "postgresql:///sample_data")
+
+        db.create_all()
+        sample_data()
+
+    def tearDown(self):
+        """Do at end of every test."""
+
+        db.session.close()
+        db.drop_all()
+
+    def test_search_by_cause(self):
+        """Can we search by cause and find a list of organization in the database?"""
+
+        result = self.client.get('/searchbycause',
+                                data='cause_id',
+                                follow_redirects=False)
+        self.assertIn(b', result.data)
+ 
+ 
+
+
+if __name__ == "__main__":
+    import unittest
+
+    unittest.main()
+
