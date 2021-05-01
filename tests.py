@@ -44,7 +44,8 @@ class FlaskTestsNeworg(TestCase):
 
         result = self.client.post('/createorg',
                                   data={'org_name':'DIVAS', 
-                                  'cause_id': 5,
+                                  'cause_id
+                                  ': 5,
                                   'mission':'To educate, encourage, and empower women to be their best',
                                   'web_url':"",
                                   'tagline': 'All women succeeding'},
