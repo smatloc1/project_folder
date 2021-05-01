@@ -26,12 +26,9 @@
 
     <p><label for="cause_id">Choose a cause:</label></p>
           <select name="cause_id" id="cause_id">
-              <option value="1">Religious Activities</option>
-              <option value="2">Scholarship and Financial Support</option>
-              <option value="3">Youth Development, Shelter, and Crisis Services</option>
-              <option value="4">Youth Education Programs and Services</option>
-              <option value="5">Social Services</option>
-              <option value="6">Women, Children, and Family Services</option>
+            {% for cause in causes%}  
+            <option value={{cause.cause_id}}>{{cause.cause_name}}</option>
+            {% endfor %}
           </select>
           <input type="submit">
       </form>

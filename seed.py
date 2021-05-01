@@ -23,6 +23,7 @@ cause3 = crud.create_cause('Youth Development, Shelter, and Crisis Services')
 cause4 = crud.create_cause('Youth Education Programs and Services')
 cause5 = crud.create_cause('Social Services')
 cause6 = crud.create_cause('Women, Children and Family Services')
+cause7 = crud.create_cause('Animal Protection and Welfare')
 
 ###########    #2. Create a new org using cause_obj    ###############
 
@@ -31,13 +32,13 @@ org1=crud.create_org_with_cause_obj(org_name='I Have a Dream Foundation', cause_
                 web_url="http://www.ihaveadreamfoundation.org", 
                 tagline="Empowering children in low-income communities to achieve higher education")
 
-org2=crud.create_org_with_cause_obj(org_name='18 Doors', cause_obj=cause1, 
+org2=crud.create_org_with_cause_obj(org_name='18Doors', cause_obj=cause1, 
                 mission='Empower people in interfaith relationships to engage in Jewish life',
-                web_url='', tagline='')
+                web_url="https://18doors.org/", tagline='Unlocking Jewish')
 
 org3=crud.create_org_with_cause_obj(org_name='100 Black Men of America', cause_obj=cause3,
                 mission='To improve the quality of life within our communities and enhance educational and economic opportunities for all African Americans.',
-                web_url="http://www.100blackmen.org/", tagline='')
+                web_url="http://www.100blackmen.org/", tagline="Improving the quality of life within our communities")
 
 
 

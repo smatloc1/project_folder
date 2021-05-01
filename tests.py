@@ -19,7 +19,7 @@ def sample_data():
 
     # Add sample Organizations
     womens_services= Cause(cause_name='Womens Services')
-    swap = Org(org_name='Sistas with a purpose', cause=womens_services, mission='To support women escaping domestic abuse and homelessness and provide them with marketable skills')
+    swap = Org(org_name='DIVAS', cause=womens_services, mission='To support women escaping domestic abuse and homelessness and provide them with marketable skills')
     
     db.session.add_all([womens_services, swap])
     db.session.commit()
@@ -44,13 +44,10 @@ class FlaskTestsNeworg(TestCase):
 
         result = self.client.post('/createorg',
                                   data={'org_name':'DIVAS', 
-                                  'cause_id
-                                  ': 5,
-                                  'mission':'To educate, encourage, and empower women to be their best',
-                                  'web_url':"",
-                                  'tagline': 'All women succeeding'},
+                                  'cause_id': 1,
+                                  'mission':'To educate, encourage, and empower women to be their best'},
                                   follow_redirects=True)
-        self.assertIn(b"Mighty Missions Registration", result.data)
+        self.assertIn(b"Womens Services", result.data)
 
     def tearDown(self):
         """Do at end of every test."""
@@ -59,6 +56,7 @@ class FlaskTestsNeworg(TestCase):
         db.drop_all()
 
 ############################  Unit Test #2 - return a profile page  #########################
+
 
 
 class FlaskTestsProfile(TestCase):
@@ -108,7 +106,7 @@ class FlaskTestsSearchbyname(TestCase):
 
         result = self.client.get('/cause',
                                 data={'cause_name': 'Womens Services'},
-                                follow_redirects=False)
+                                follow_redirects=True)
         self.assertIn(b'Mighty Mission Organizations Related by Cause', result.data)
  
     def tearDown(self):

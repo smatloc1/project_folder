@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-###################################  Create Cause Class   #############################################  
 
 class Cause(db.Model):
     """ Organization causes """
@@ -19,8 +18,7 @@ class Cause(db.Model):
         return f'<Cause cause_id={self.cause_id}, cause_name={self.cause_name}>'
  
  
- #####################################   Create Org Class  ########################################### 
-
+ 
 
 class Org(db.Model):
     """ An Organization Profile """
@@ -31,11 +29,9 @@ class Org(db.Model):
     org_name = db.Column(db.String(50), nullable=False, unique=True)
     mission = db.Column(db.String(200))
     cause_id = db.Column(db.Integer, db.ForeignKey('causes.cause_id'))
-    image = db.Column(db.String)
     web_url = db.Column(db.String) 
     tagline = db.Column(db.String)
    
-
     cause = db.relationship('Cause', backref='orgs')
 
     def __repr__(self):

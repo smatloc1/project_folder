@@ -2,7 +2,7 @@
 
 from model import db, Org, Cause, connect_to_db
 
-def create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline, image):
+def create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline):
     """Create and return a new organization."""
 
     org = Org(org_name=org_name.lower(), 
@@ -18,7 +18,7 @@ def create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline, imag
 
 ### cause_obj parameter is a cause object not a string
 
-def create_org_with_cause_obj(org_name, cause_obj, mission, web_url, tagline, image):
+def create_org_with_cause_obj(org_name, cause_obj, mission, web_url, tagline):
     """Create and return a new organization."""
 
     org = Org(org_name=org_name.lower(), 
@@ -41,6 +41,12 @@ def create_cause(cause_name):
     db.session.commit()
 
     return cause
+
+def get_all_causes():
+    """Get all organizational causes."""
+
+    return Cause.query.all()
+
 
 
 def get_orgs():

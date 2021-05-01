@@ -28,7 +28,9 @@ def homepage():
 @app.route('/registrationform')
 def reg_form():
     
-    return render_template('register.html')
+    causes= crud.get_all_causes()
+
+    return render_template('register.html', causes=causes)
 
 
 
@@ -62,19 +64,18 @@ def create_org_registration():
     cause_id = request.form.get('cause_id')
     web_url = request.form.get('web_url')
     tagline = request.form.get('tagline')
-    image = request.form.get('image')
 
     print('*'*20)
     print(org_name, mission, cause_id)
     org = crud.get_org_by_name(org_name.lower())
 
     if not org:
-        new_org = crud.create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline, image)
+        new_org = crud.create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline)
         flash('CONGRATULATIONS!  YOU HAVE NOW BEEN ADDED TO THE MIGHTY MISSIONS NETWORK.')
         return redirect(f'/profiles/{new_org.org_name}')
     else: 
         flash('THIS ORGANIZATION ALREADY EXISTS IN OUR NETWORK.')
-        return render_template('homepage.html')        
+        return redirect(f'/profiles/{org.org_name}')        
 
    
     
@@ -98,9 +99,12 @@ def show_org(org_name):
 @app.route('/search', methods=['GET'])
 def search():
 
+
+    causes=crud.get_all_causes()
+
     """ Render the Search page """
 
-    return render_template('search.html')
+    return render_template('search.html', causes=causes)
 
 
 
@@ -144,8 +148,8 @@ def org_by_name():
     org = crud.get_org_by_name(org_name.lower())
 
     if not org:
-        flash('This organization does not exist')
-        return render_template('search.html')
+        flash('THIS ORGANIZATION IS NOT REGISTERED IN OUR DATABASE')
+        return redirect('/registrationform')
 
     return redirect(f'/profiles/{org_name}')
 
