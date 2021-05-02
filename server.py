@@ -15,6 +15,25 @@ app.jinja_env.undefined = StrictUndefined
 
 
 
+
+################       Main Homepage        ####################
+
+@app.route('/contact')
+def contactpage():
+    """Contact information Page"""
+
+    return render_template('contact.html')
+
+
+@app.route('/about')
+def aboutpage():
+    """information about Mighty Missions"""
+
+    return render_template('about.html')
+
+
+
+
 ################       Main Homepage        ####################
 
 @app.route('/')
