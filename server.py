@@ -10,7 +10,7 @@ import requests
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
-app.secret_key = "2455lbkjfgjhfghkf"
+app.secret_key = "2455lbkjfgjhlllkfghkf"
 app.jinja_env.undefined = StrictUndefined
 
 
@@ -64,12 +64,14 @@ def login_org():
     print('*'*20)
     print(org_name)
     print(org)
-
+    
     if not org:
         flash('THIS ORGANIZATION IS NOT REGISTERED IN OUR DATABASE')
         return redirect('/registrationform')
     
     else:
+        session['org_name'] = org.org_name
+        session['org_id'] = org.org_id
         return redirect(f'/profiles/{org.org_name}')
  
 
@@ -104,12 +106,13 @@ def create_org_registration():
 
 ##############   Returns a profile page   #################
 
-@app.route('/profiles/<org_name>')
-def show_org(org_name):
+@app.route('/profiles/<org_id>')
+def show_org(org_id):
     """ Show details on a particular organization."""
     print("THIS IS FOR DEBUGGING\n\n\n\n\n\n")
-    print(org_name)
-    org = crud.get_org_by_name(org_name)
+    print(org_id)
+    # org = crud.get_org_by_name(org_name)
+    org = crud.get_org_by_id(org_id)
     print(org)
     return render_template('profiles.html', org=org)
 

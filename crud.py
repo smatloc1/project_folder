@@ -58,9 +58,13 @@ def get_orgs():
 
 def get_org_by_name(org_name):
     """ Return an organization by name."""
+    print("*"*20, "in crud: org name = ", org_name)
 
     return Org.query.filter(func.lower(Org.org_name) ==func.lower(org_name)).first()
 
+def get_org_by_id(org_id):
+    """ Return an organization by name."""
+    return Org.query.get(org_id)
 
 def get_orgs_by_cause(cause_name):
    """Return a list of organizations by cause."""
