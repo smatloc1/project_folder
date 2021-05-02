@@ -41,9 +41,11 @@ def login_org():
     """ Organization enters org_name and a search is completed """
       
     org_name = request.args.get('org_name')
-    org = crud.get_org_by_name(org_name.lower())
-    
-    
+    org = crud.get_org_by_name(org_name)
+    print('*'*20)
+    print(org_name)
+    print(org)
+
     if not org:
         flash('THIS ORGANIZATION IS NOT REGISTERED IN OUR DATABASE')
         return redirect('/registrationform')
@@ -67,7 +69,7 @@ def create_org_registration():
 
     print('*'*20)
     print(org_name, mission, cause_id)
-    org = crud.get_org_by_name(org_name.lower())
+    org = crud.get_org_by_name(org_name)
 
     if not org:
         new_org = crud.create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline)
@@ -88,7 +90,7 @@ def show_org(org_name):
     """ Show details on a particular organization."""
     print("THIS IS FOR DEBUGGING\n\n\n\n\n\n")
     print(org_name)
-    org = crud.get_org_by_name(org_name.lower())
+    org = crud.get_org_by_name(org_name)
     print(org)
     return render_template('profiles.html', org=org)
 
@@ -145,11 +147,11 @@ def org_by_name():
     """ Search for an organization by name """
 
     org_name = request.form.get('org_name')
-    org = crud.get_org_by_name(org_name.lower())
+    org = crud.get_org_by_name(org_name)
 
     if not org:
         flash('THIS ORGANIZATION IS NOT REGISTERED IN OUR DATABASE')
-        return redirect('/registrationform')
+        return redirect('/search')
 
     return redirect(f'/profiles/{org_name}')
 

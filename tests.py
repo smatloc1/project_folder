@@ -104,10 +104,10 @@ class FlaskTestsSearchbyname(TestCase):
     def test_search_by_cause(self):
         """Can we search by cause and find a list of organization in the database?"""
 
-        result = self.client.get('/cause',
-                                data={'cause_name': 'Womens Services'},
+        result = self.client.get('/cause?cause_name=Womens%20Services',
+                                #data={'cause_name': 'Womens Services'},
                                 follow_redirects=True)
-        self.assertIn(b'Mighty Mission Organizations Related by Cause', result.data)
+        self.assertIn(b'Cause: Womens Services', result.data)
  
     def tearDown(self):
         """Do at end of every test."""

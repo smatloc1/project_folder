@@ -46,19 +46,19 @@ org3=crud.create_org_with_cause_obj(org_name='100 Black Men of America', cause_o
 
 org4=crud.create_org_with_cause_id(org_name='After-School All-Stars', cause_id=3, 
                 mission='To provide comprehensive after-school programs that keep children safe and help them succeed in school and life',
-                web_url='', tagline='')
+                web_url='http://www.afterschoolallstars.org/', tagline='After-school and summer programs for underserved youth.')
 
 org5=crud.create_org_with_cause_id(org_name='4 Paws for Ability', cause_id=5,
                 mission='4 Paws for Ability strives to be the leading provider of service dogs for children regardless of disability',
-                web_url='', tagline='')
+                web_url='http://www.4pawsforability.org/', tagline='Providing service dogs to people with disabilities worldwide')
 
 org6=crud.create_org_with_cause_id(org_name='AdoptAClassroom.org', cause_id=4, 
                 mission='To give teachers a hand by providing needed classroom materials so that students can succeed',
-                web_url='', tagline='')
+                web_url='http://www.adoptaclassroom.org', tagline='We give teachers a hand')
 
 org7=crud.create_org_with_cause_id(org_name='AAUW - American Association of University Women', cause_id=4,
                 mission='To advance equity for women and girls through advocacy, education, philanthropy, and research.',
-                web_url='', tagline='')
+                web_url='http://www.aauw.org', tagline='Empowering women since 1881')
  
 
  
