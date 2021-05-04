@@ -72,7 +72,7 @@ def login_org():
     else:
         session['org_name'] = org.org_name
         session['org_id'] = org.org_id
-        return redirect(f'/profiles/{org.org_name}')
+        return redirect(f'/profiles/{org.org_id}')
  
 
 
@@ -95,13 +95,17 @@ def create_org_registration():
     if not org:
         new_org = crud.create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline)
         flash('CONGRATULATIONS!  YOU HAVE NOW BEEN ADDED TO THE MIGHTY MISSIONS NETWORK.')
-        return redirect(f'/profiles/{new_org.org_name}')
+        return redirect(f'/profiles/{new_org.org_id}')
     else: 
         flash('THIS ORGANIZATION ALREADY EXISTS IN OUR NETWORK.')
-        return redirect(f'/profiles/{org.org_name}')        
+        return redirect(f'/profiles/{org.org_id}')        
 
    
-    
+@app.route('/logout') 
+def logout():
+    del session['org_id']
+    del session['org_name']
+    return redirect('/') 
 
 
 ##############   Returns a profile page   #################
@@ -175,7 +179,7 @@ def org_by_name():
         flash('THIS ORGANIZATION IS NOT REGISTERED IN OUR DATABASE')
         return redirect('/search')
 
-    return redirect(f'/profiles/{org_name}')
+    return redirect(f'/profiles/{org.org_id}')
 
 
 

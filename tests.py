@@ -74,7 +74,7 @@ class FlaskTestsProfile(TestCase):
     def test_profilepage(self):
         """Can we retrieve the details of an organization?"""
 
-        result = self.client.get('/profiles/DIVAS')
+        result = self.client.get('/profiles/1')
         self.assertIn(b"Mighty Missions Profile", result.data)
 
     def tearDown(self):
