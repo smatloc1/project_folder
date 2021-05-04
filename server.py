@@ -95,10 +95,14 @@ def create_org_registration():
     if not org:
         new_org = crud.create_org_with_cause_id(org_name, cause_id, mission, web_url, tagline)
         flash('CONGRATULATIONS!  YOU HAVE NOW BEEN ADDED TO THE MIGHTY MISSIONS NETWORK.')
+        session['org_name'] = new_org.org_name
+        session['org_id'] = new_org.org_id
         return redirect(f'/profiles/{new_org.org_id}')
     else: 
         flash('THIS ORGANIZATION ALREADY EXISTS IN OUR NETWORK.')
-        return redirect(f'/profiles/{org.org_id}')        
+        return redirect(f'/profiles/{org.org_id}')
+   
+    
 
    
 @app.route('/logout') 
