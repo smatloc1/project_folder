@@ -122,7 +122,7 @@ def show_org(org_id):
     # org = crud.get_org_by_name(org_name)
     org = crud.get_org_by_id(org_id)
     print(org)
-    return render_template('profiles.html', org=org)
+    return render_template('profile#2.html', org=org)
 
 
 
@@ -163,6 +163,8 @@ def search_orgs_by_cause():
      orgs = crud.get_orgs_by_cause(cause_obj)
     
      return render_template('searchbycause.html', cause_obj=cause_obj)
+
+
 
 #@app.route('/test/', methods=["POST"])
 #def show_orgs_by_cause():

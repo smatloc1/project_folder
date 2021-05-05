@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Mighty Missions Profile Page{% endblock %}
+
+{% block head %}
+<style> 
+html, body {
+  background-image: url('/static/img/AdobeStock_181205632.jpeg');
+  background-size: cover;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+    <br>
+    
+    <div class="col-sm-9">
+      <div class="well">
+        <h2>Mighty Missions Profile</h2>
+        <br>
+        <h4><label>Organization:</label> {{org.org_name}}
+        <h4><label>Organization ID:</label>  {{org.org_id}} 
+        <h4><label>Mission:</label> {{org.mission}}
+        <h4><label>Web URL:</label> {{org.web_url}}
+        <h4><label>Tagline:</label> {{org.tagline}}
+        </h4>
+        
+    </div>
+    </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+            <h4><label>Cause:</label> 
+            <p>{{org.cause.cause_name}}</p> 
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Lipscum feiaoe ae;;alfe
+              ;la;llsakd;lkasf;lkd;ld;la;l
+              alkjf;aljd;ldj;la;dlka;lka;lj
+              sldj;asdlj;apsoej'a;lsd<label>
+          </div>
+        </div>
+     
+{% endblock %}
+

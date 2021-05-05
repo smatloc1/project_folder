@@ -1,37 +1,53 @@
 {% extends 'base.html' %}
 {% block title %}Mighty Missions Registration{% endblock %}
 
-{% block body %}
-  <title>Registration</title>
-  
-  <h1>Mighty Missions Registration</h1>
+{% block head %}
+<style> 
+html, body {
+  background-color:wheat;
+  background-size: cover;
+  color:black;
+}
+</style>
+{% endblock %}
 
-  <div>
-    
-    <p>This organization does not exist in our database.  To add this organization, please enter your information below:</p>
-   
+
+{% block body %}
+<title>Registration</title>
+  
+<h1>Mighty Missions Registration</h1>
+
+
+<div class="container">
+  <form action="/createorg", method='POST'>
+    <div class="form-group">
+      <label for="org_name">Enter Organization Name:</label>
+      <input type="text" class='form-control' id='org_name' placeholder="Enter Organization Name" name="org_name">
     </div>
 
-  <form action="/createorg", method='POST'>
-  
-    <p><label>Type in the name of your Organization: <input type="text" name='org_name'></label></p>
-  
-    <p><label>Type in your Mission Statement: <input type="text" name="mission"></label></p>
+    <div class="form-group">
+      <label for="mission">Enter Mission Statement:</label>
+      <input type="text" class='form-control' id='mission' placeholder="Enter Mission Statement" name="mission">
+    </div>
 
-    <p><label>Type in your Website URL: <input type="url" name="web_url"></label></p>
-
-    <p><label>Type in your Tagline: <input type="text" name="tagline"></label></p>
-
-    <p><label>Select the Cause Area of your Organization:</label></p>
-
-    <p><label for="cause_id">Choose a cause:</label></p>
+    <div class="form-group">
+      <label for="web_url">Web URL:</label>
+      <input type="url" class="form-control" id="web_url" placeholder="Enter Website URL" name="web_url">
+    </div>
+    
+    <div class="form-group">
+      <label for="tagline">Tagline:</label>
+      <input type="tagline" class="form-control" id="tagline" placeholder="Enter Tagline" name="tagline">
+    </div>
+      
+      <h4><label><for="cause_id">Choose a cause:</label></h4>
           <select name="cause_id" id="cause_id">
-            {% for cause in causes%}  
+            {% for cause in causes %}  
             <option value={{cause.cause_id}}>{{cause.cause_name}}</option>
             {% endfor %}
           </select>
-          <input type="submit">
-      </form>
-
+          <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
 
 {% endblock %}
