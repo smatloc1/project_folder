@@ -1,47 +1,43 @@
 {% extends 'base.html' %}
 {% block title %}Mighty Missions Search Page{% endblock %}
 
+
+{% block head %}
+<style> 
+html, body {
+  background-color:blanchedalmond;
+  background-size: cover;
+  color:black;
+}
+</style>
+{% endblock %}
+
+  
 {% block body %}
   
     <h1>Mighty Missions Search Page</h1>
 
-
-    <div>
-      
-    Mighty Missions is created to help organizations like yours find and connect with other
-    organizations with the same mission and cause.  We believe these connections will bring
-    a greater reward and enable you to increase your ability to meet the needs of your community. 
-       
-    </div>
-
-
     <br><br>
     <form action="/list" method="GET">
-    <p><label>To retrieve a list of all Mighty Missions organizations click submit below:</label></p>
-    <input type="submit">
+    <h4><label>To retrieve a list of all Mighty Missions organizations click submit:  </label>   <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <br><br>
     <form action="/cause" method="GET">
-        <label for="cause_name">Choose a cause:</label>
+        <h4><label for="cause_name">Search for oganizations by cause:</label></h4>
         <select name="cause_name" id="cause_name">
             {% for cause in causes %}
             <option value='{{cause.cause_name}}'>{{cause.cause_name}}</option>
             {% endfor %}
         </select>
-        <input type="submit">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    <br><br>
-    <form action="/searchbyname" method="POST">
-        <p><label>Search for an organization by Name:<input type="text" name='org_name'></label></p>
-        <input type="submit">
-    </form>
     
     <br><br>
-    <form action="/" method="GET">
-        <p><label>To return to homepage click submit below:</label></p>
-        <input type="submit" value="Submit">
+    <form action="/searchbyname" method="POST">
+        <h4><label>Search for an organization by Name:  <input type="text" name='org_name'></label>   <button type="submit" class="btn btn-primary">Submit</button>
+       
     </form>
 
 

@@ -1,29 +1,34 @@
 {% extends 'base.html' %}
 {% block title %}Mighty Missions Search by Cause{% endblock %}
 
+{% block head %}
+<style> 
+html {
+  background-image: url('static/img/Nonprofit startup2.jpeg');
+  color: white;
+  background-size: cover;
+  font-weight: bold;
+}
+.body {
+    margin: 48px;
+}
+#flash {
+      color:black;
+    }
+
+</style>
+{% endblock %}
+
 {% block body %}
  
-
-
-    <h1>Mighty Missions Organizations Related by Cause</h1>  
-    
-    <h1>Cause: {{cause_obj.cause_name}}</h1> 
-    
+    <br>
+    <h2>List of Organizations Related by Cause - {{cause_obj.cause_name}}</h2>  
+    <br>
     {% for org in cause_obj.orgs %}
-
-    <h2>{{org.org_name}}</h2> 
-
-
+            
+<div> 
+    <h4>      {{org.org_name}}</h4>
+</div>
     {% endfor %}
-
-
-
-<br><br>
-<form action="/search" method="GET">
-<p><label>To return to search page click submit below:</label></p>
-<br><br>
-<input type="submit" value="Submit">
-</form>
-
-
+    
 {% endblock %}

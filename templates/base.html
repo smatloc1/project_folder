@@ -39,6 +39,16 @@
       }
       .row.content {height:auto;} 
     }
+    html, body {
+      background-color:blanchedalmond;
+      background-size: cover;
+      color:black;
+      font-weight: bold;
+    
+    }
+    #flash {
+      color:black
+    }
   </style>
 
  {% block head %}  {% endblock %}
@@ -71,7 +81,7 @@
   </div>
 </nav>
 {% if 'org_name' in session %}
-<p>Hello {{session['org_name']}}...You are signed in!</p>
+<p id='flash' >Hello {{session['org_name']}}...You are signed in!</p>
 {% endif %}
     {% with messages = get_flashed_messages() %}
         {% if messages %}

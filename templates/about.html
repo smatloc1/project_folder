@@ -4,10 +4,18 @@
 {% block head %}
 <style> 
 html, body {
-  background-color:wheat;
+  background-color:blanchedalmond;
   background-size: cover;
   color:black;
 }
+.img-fluid {
+width:550px !important;
+display: block;
+margin:auto;
+
+}
+
+
 </style>
 {% endblock %}
 
@@ -16,20 +24,23 @@ html, body {
  
   
 <div class="container-fluid text-center">    
-  <div class="row content">
+  <div class="row">
     
     <div class="col-sm-8 text-left"> 
       
       <h1>About Mighty Missions</h1>
-      <p>Mighty Missions is a network of non-profits, social enterprises, and other mission-based organizations,
-       created to faciliatate these organizations in collaborating with each other according to their similar cause. 
-       We believe these connections will bring a greater reward and enable you to increase your ability to meet the needs of your community. 
+      <p>Mighty Missions is a database of non-profits, social enterprises, and other mission-based organizations,
+       created to faciliatate these organizations in collaborating with each other. We believe connections based on similar causes and mission
+       will bring a greater reward and enable each organization to increase their ability to meet the needs of their communities. 
            
       </p>
-      <p>
-      </p>
-      <hr>
-     </div>
+     
+</div>
+  </div>
+  <div class='row'>
+    <div class='col'>
+      <img src='/static/img/Online Community.jpg'class="img-fluid">
+    </div>
   </div>
 </div>
 
